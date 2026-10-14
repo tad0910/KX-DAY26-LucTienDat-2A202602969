@@ -4,6 +4,11 @@ import asyncio
 import json
 import sys
 
+# Fix Windows console utf-8 encoding
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 

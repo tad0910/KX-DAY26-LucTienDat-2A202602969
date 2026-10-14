@@ -4,7 +4,6 @@
 
 ## Cấu trúc repo
 
-```
 day26-mcp/
 ├── README.md                ← Bạn đang đọc file này
 ├── requirements.txt         ← pip install -r requirements.txt
@@ -18,19 +17,31 @@ day26-mcp/
 │   ├── weather_server.py
 │   └── weather_client.py
 │
-└── 03-production/           ← Bước 3: Auth, Tool Registry, Versioning
-    ├── README.md
-    ├── auth_server.py
-    ├── auth_client.py
-    ├── registry.json
-    ├── registry_client.py
-    ├── versioned_server.py
-    └── versioned_client.py
+├── 03-production/           ← Bước 3: Auth, Tool Registry, Versioning
+│   ├── README.md
+│   ├── auth_server.py
+│   ├── auth_client.py
+│   ├── registry.json
+│   ├── registry_client.py
+│   ├── versioned_server.py
+│   └── versioned_client.py
 │
-└── 04-lab/                  ← Bước 4: Agent Google ADK + MCP server thật (WeatherAPI)
-    ├── README.md
-    ├── mcp-server/          ← FastMCP server (Streamable HTTP, Dockerfile cho Cloud Run)
-    └── mcp-client/          ← ADK agent dùng McpToolset
+├── 04-lab/                  ← Bước 4: Agent Google ADK + MCP server thật (WeatherAPI)
+│   ├── README.md
+│   ├── mcp-server/          ← FastMCP server (Streamable HTTP, Dockerfile cho Cloud Run)
+│   └── mcp-client/          ← ADK agent dùng McpToolset
+│
+└── screenshots/             ← Bằng chứng nghiệm thu bài lab
+    ├── 01-function-calling.png
+    ├── 02-mcp-client.png
+    ├── 03a-auth-ok.png
+    ├── 03a-auth-fail.png
+    ├── 03b-registry.png
+    ├── 03c-versioning.png
+    ├── 04-verify-setup.png
+    ├── 04-adk-current.png
+    ├── 04-adk-forecast.png
+    └── 05-cloud-run.png      ← (tùy chọn)
 ```
 
 > Bước 01–03 dùng **MCP Python SDK v2** (`mcp>=2.0`, xem `requirements.txt`).
@@ -239,3 +250,34 @@ Chi tiết + code cho cả 3 phần: xem [`03-production/README.md`](03-producti
 ---
 
 **Tóm lại:** Function Calling là *cơ chế model gọi công cụ*; MCP là *chuẩn để kết nối model với các công cụ đó* — và MCP thực chất dùng Function Calling làm nền tảng để hoạt động.
+
+---
+
+## Bằng chứng thực nghiệm (Screenshots)
+
+Dưới đây là hình ảnh bằng chứng chạy thành công các bài thực hành theo checklist nghiệm thu:
+
+### 1. Bước 1: Function Calling thuần
+![01-function-calling](screenshots/01-function-calling.png)
+
+### 2. Bước 2: MCP Basics (Client & Server)
+![02-mcp-client](screenshots/02-mcp-client.png)
+
+### 3. Bước 3: Production
+- **Auth thành công (Bearer Token hợp lệ):**
+  ![03a-auth-ok](screenshots/03a-auth-ok.png)
+- **Auth thất bại (Token sai hoặc thiếu):**
+  ![03a-auth-fail](screenshots/03a-auth-fail.png)
+- **Tool Registry (Khám phá công cụ động qua catalog):**
+  ![03b-registry](screenshots/03b-registry.png)
+- **Versioning (Tương thích ngược v1 và v2 song song):**
+  ![03c-versioning](screenshots/03c-versioning.png)
+
+### 4. Bước 4: Lab Trọng tâm (Google ADK & Remote FastMCP)
+- **Kiểm tra môi trường & Dependencies (verify_setup):**
+  ![04-verify-setup](screenshots/04-verify-setup.png)
+- **ADK Web - Lấy thời tiết hiện tại (`get_current_weather`):**
+  ![04-adk-current](screenshots/04-adk-current.png)
+- **ADK Web - Lấy dự báo thời tiết (`get_forecast`):**
+  ![04-adk-forecast](screenshots/04-adk-forecast.png)
+

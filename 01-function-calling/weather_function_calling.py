@@ -9,10 +9,24 @@ Cách chạy:
     python weather_function_calling.py
 """
 
+import os
+import sys
+from dotenv import load_dotenv
+
+# Configure UTF-8 for Windows console
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+
+# Load environment from root or local or mcp-client .env
+load_dotenv()
+load_dotenv(os.path.join(os.path.dirname(__file__), "..", "04-lab", "mcp-client", ".env"))
+
 from google import genai
 from google.genai import types
 
-client = genai.Client()
+api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+client = genai.Client(api_key=api_key)
 
 MODEL = "gemini-2.5-flash"
 
